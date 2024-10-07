@@ -9,6 +9,10 @@ typedef enum {
   OP_NEGATE,
   OP_RETURN,
 
+  OP_NIL,
+  OP_TRUE,
+  OP_FALSE,
+
   // binary operators
   OP_ADD,
   OP_SUBTRACT,
