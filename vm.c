@@ -54,6 +54,11 @@ static Value peek(int distance) {
   return vm.stackTop[-1 - distance];
 }
 
+static bool isFalsey(Value value) {
+  // falsiness/truthiness follows Ruby: nil and false are falsey, all else truthy
+  return IS_NIL(value) || (IS_BOOL(value) && !AS_BOOL(value));
+}
+
 InterpretResult interpret(const char* source) {
   Chunk chunk;
   initChunk(&chunk);
@@ -130,6 +135,10 @@ static InterpretResult run() {
       }
       case OP_NIL: {
         push(NIL_VAL);
+        break;
+      }
+      case OP_NOT: {
+        push(BOOL_VAL(isFalsey(pop())));
         break;
       }
       case OP_RETURN: {
