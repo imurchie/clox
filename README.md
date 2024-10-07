@@ -1,5 +1,9 @@
 ## C Lox
 
+> When you are a Bear of Very Little Brain, and you Think of Things, you find sometimes that a Thing which seemed very Thing ish inside you is quite different when it gets out into the open and has other people looking at it.
+>
+> A.A. Milne, _Winnie-the-Pooh_
+
 A [C](https://www.open-std.org/jtc1/sc22/wg14/) implementation of the interpreter
 for the Lox language.
 
