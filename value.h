@@ -3,9 +3,36 @@
 
 #include "common.h"
 
-// abstract how values are handled, so code using them
-// do not need to change when the representation changes
-typedef double Value;
+typedef enum {
+  VAL_BOOL,
+  VAL_NIL,
+  VAL_NUMBER,
+} ValueType;
+
+// a "tagged union" so that fields overlap in memory
+// since it is only one type at a time, noted by the 
+// "type" field
+typedef struct {
+  ValueType type;
+  union {
+    bool boolean;
+    double number;
+  } as;
+} Value;
+
+// handle translating value into a Value object
+#define BOOL_VAL(value)   ((Value){VAL_BOOL, {.boolean = value}})
+#define NIL_VAL           ((Value){VAL_NIL, {.number = 0}})
+#define NUMBER_VAL(value) ((Value){VAL_NUMBER, {.number = value}})
+
+// handle translating Value object into value
+#define AS_BOOL(value)    ((value).as.boolean)
+#define AS_NUMBER(value)  ((value).as.number)
+
+// check the type
+#define IS_BOOL(value)    ((value).type == VAL_BOOL)
+#define IS_NIL(value)     ((value).type == VAL_NIL)
+#define IS_NUMBER(value)  ((value).type == VAL_NUMBER)
 
 // constant pool type
 typedef struct {
