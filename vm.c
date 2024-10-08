@@ -11,9 +11,6 @@ VM vm;
 static InterpretResult run();
 
 static void resetStack();
-static void push(Value value);
-static Value pop();
-static Value peek(int distance);
 
 void initVM() {
   resetStack();
